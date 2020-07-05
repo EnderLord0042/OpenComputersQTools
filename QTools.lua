@@ -25,7 +25,7 @@ local function menu(menuName,menuEntries)
   GPUProxy.fill(5,(screenHeight - 6),(screenWidth - 10),1," ")
   GPUProxy.fill((screenWidth - 5),6,1,(screenHeight - 12)," ")
   os.sleep(500)
-end,
+end
 local function desc(descName,descInfo)
   print("placeholder")
 end
