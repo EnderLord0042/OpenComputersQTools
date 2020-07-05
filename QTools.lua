@@ -13,23 +13,22 @@ end
 
 local screenWidth,sceenHeight = GPUProxy.getResolution()
 
-local menu,desc =
-  function(menuName,menuEntries)
-    local menuSelection = 1
-    GPUProxy.setBackground(colorPrimary))
-    GPUProxy.setForegroundground(colorSecondary)
-    GPUProxy.fill(1,1,screenWidth,screenHeight," ")
-    GPUProxy.set(5,4,menuName)
-    GPUProxy.setBackground(colorSecondary)
-    GPUProxy.fill(5,6,(screenWidth - 10),1," ")
-    GPUProxy.fill(5,6,1,(screenHeight - 12)," ")
-    GPUProxy.fill(5,(screenHeight - 6),(screenWidth - 10),1," ")
-    GPUProxy.fill((screenWidth - 5),6,1,(screenHeight - 12)," ")
-    os.sleep(500)
-  end,
-  function(descName,descInfo)
-    print("placeholder")
-  end
+local function menu(menuName,menuEntries)
+  local menuSelection = 1
+  GPUProxy.setBackground(colorPrimary))
+  GPUProxy.setForegroundground(colorSecondary)
+  GPUProxy.fill(1,1,screenWidth,screenHeight," ")
+  GPUProxy.set(5,4,menuName)
+  GPUProxy.setBackground(colorSecondary)
+  GPUProxy.fill(5,6,(screenWidth - 10),1," ")
+  GPUProxy.fill(5,6,1,(screenHeight - 12)," ")
+  GPUProxy.fill(5,(screenHeight - 6),(screenWidth - 10),1," ")
+  GPUProxy.fill((screenWidth - 5),6,1,(screenHeight - 12)," ")
+  os.sleep(500)
+end,
+local function desc(descName,descInfo)
+  print("placeholder")
+end
 
 local testResult = menu("test",{"Option 1","Option 2", Option 3})
 
