@@ -43,7 +43,7 @@ local function desc(descName,descInfo,continue)
   end
   local descLinesNum = math.ceil(string.len(descInfo)/(screenWidth - 10))
   local descLines = {}
-  for i = 1,desclinesNum do
+  for i = 1,descLinesNum,+1 do
     GPUProxy.set(6,(i + 5),string.sub(descInfo,(0 + ((screenWidth - 10) * i)),((screenWidth - 10) * (i + 1))))
   end
   GPUProxy.setBackground(colorSecondary)
@@ -65,4 +65,3 @@ GPUProxy.setBackground(0x000000)
 GPUProxy.setForeground(0xFFFFFF)
 tty.clear()
 
-print(testResult)
