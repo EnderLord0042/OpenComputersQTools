@@ -58,25 +58,27 @@ local function desc(descName,descInfo,continue)
   GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
   GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
   GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
-  local returnValue = nil
+  local returnValue = ""
   local function handleKeyPress(event,keyboardAddress,char,code,playerName)
     if code == 16 then
-      returnValue = false
+      returnValue = "exit"
     end
     if code == 28 && continue then
-      returnValue = true
+      returnValue = "continue"
     end
   end
   event.listen("key_down", handleKeyPress)
-  while returnValue == nil do
+  while returnValue == "" do
     os.sleep(0.05)
   end
   return returnValue
 end
 
-desc("Test","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",true)
+local test = desc("Test","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",true)
 
 GPUProxy.setBackground(0x000000)
 GPUProxy.setForeground(0xFFFFFF)
 tty.clear()
+
+print(test)
 
