@@ -67,7 +67,7 @@ local function desc(descName,descInfo,continue)
       returnValue = true
     end
   end
-  local function handleTouch(event,screenX,screenY,playerName)
+  local function handleTouch(event,screenAddress,screenX,screenY,playerName)
     if screenY == (screenHeight - 1) and screenX > 3 and screenX < 15 then
       returnValue = false
     end
