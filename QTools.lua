@@ -1,5 +1,7 @@
 local component = require("component")
 local os = require("os")
+local keyboard = require("keyboard")
+local event = require("event")
 local tty = require("tty")
 local colors = require ("colors")
 local GPUProxy = component.getPrimary("gpu")
@@ -56,7 +58,17 @@ local function desc(descName,descInfo,continue)
   GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
   GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
   GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
-  os.sleep(500)
+  local returnValue = nil
+  local function handleKeyPress(keyboardAddress)
+    if keyboard.keys[keyboardAddress] = "q" then
+      returnValue = false
+    end
+  end
+  event.listen("key_down", handleKeyPress)
+  while returnValue == nil do
+    os.sleep(0.05)
+  end
+  return returnValue
 end
 
 desc("Test","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",true)
