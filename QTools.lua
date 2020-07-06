@@ -58,17 +58,17 @@ local function desc(descName,descInfo,continue)
   GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
   GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
   GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
-  local returnValue = ""
+  local returnValue = nil
   local function handleKeyPress(event,keyboardAddress,char,code,playerName)
     if code == 16 then
-      returnValue = "exit"
+      returnValue = false
     end
-    if code == 28 && continue then
-      returnValue = "continue"
+    if code == 28 and continue then
+      returnValue = true
     end
   end
   event.listen("key_down", handleKeyPress)
-  while returnValue == "" do
+  while returnValue == nil do
     os.sleep(0.05)
   end
   return returnValue
