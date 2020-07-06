@@ -59,9 +59,12 @@ local function desc(descName,descInfo,continue)
   GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
   GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
   local returnValue = nil
-  local function handleKeyPress(keyboardAddress)
-    if keyboard.keys[keyboardAddress] = "q" then
+  local function handleKeyPress(event,keyboardAddress,char,code,playerName)
+    if code == 16 then
       returnValue = false
+    end
+    if code == 28 && continue then
+      returnValue = true
     end
   end
   event.listen("key_down", handleKeyPress)
