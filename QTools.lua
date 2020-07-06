@@ -67,10 +67,21 @@ local function desc(descName,descInfo,continue)
       returnValue = true
     end
   end
+  local function handleTouch(event,screenX,screenY,playerName)
+    if screenY == (screenHeight - 1) and screenX > 3 and screenX < 15 then
+      returnValue = false
+    end
+    if screenY == (screenHeight - 1) and screenX > 15 and screenX < 30 and continue then
+      returnValue = true
+    end
+  end
   event.listen("key_down", handleKeyPress)
+  event.listen("touch",handleTouch)
   while returnValue == nil do
     os.sleep(0.05)
   end
+  event.ignore("key_down", handleKeyPress)
+  event.ignore("touch",handleTouch)
   return returnValue
 end
 
