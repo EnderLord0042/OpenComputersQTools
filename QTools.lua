@@ -43,8 +43,10 @@ local function desc(descName,descInfo,continue)
   end
   local descLinesNum = math.ceil(string.len(descInfo)/(screenWidth - 10))
   local descLines = {}
-  for i = 1,descLinesNum,+1 do
+  local i = 1
+  while i < descLinesNum do
     GPUProxy.set(6,(i + 5),string.sub(descInfo,(0 + ((screenWidth - 10) * i)),((screenWidth - 10) * (i + 1))))
+    i += 1
   end
   GPUProxy.setBackground(colorSecondary)
   GPUProxy.setForeground(colorPrimary)
