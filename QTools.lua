@@ -163,11 +163,25 @@ local function menu(menuName,menuEntries,info)
 end
 
 
-local test = menu("Test",{"Option 1","Option 2","Option 3"},{{"Test","Test Info 1"},{"Test","Test Info 2"},{"Test","Test Info 3"}})
+local menu1result = nil
+while not menu1result == "exit" do
+  menu1result = menu("QTools v1.0.0",{"EEPROM Tools","QNet","QDestop"},{{"EEPROM Tools Info","This is a collection of tools to allow you to easily make small changes to your EEPROM."},{"QNet Info","This is a collection of tools used in QNet, an internet system for OpenComputers based on the real Internet."},{"QDesktop Tools","This is a collection of tools for installing and modifying QDesktop, a desktop for OpenOS."}})
+  if menu1result == 1 then
+    local menu2result == nil
+    while not menu2result == "exit" do
+      menu2result == menu("EEPROM Tools",{"Remove Beep"},{{"Remove Beep Info","Many different types of BIOS have a computer.beep() function call. This removes that."}})
+      if menu2result == 1 then
+        if desc("Will Alter EEPROM","This will alter the EEPROM currently in your computer. Please enter the EEPROM to be altered or go back.",true)
+          desc("Not Implemented","This tool is not yet implemented in QTools. Please wait for another release",false)
+      end
+    end
+  elseif menu1result == 2 then
+    desc("Not Implemented","This tool is not yet implemented in QTools. Please wait for another release",false)
+  elseif menu1result == 3 then
+    desc("Not Implemented","This tool is not yet implemented in QTools. Please wait for another release",false)
+  end
+end
 
 GPUProxy.setBackground(0x000000)
 GPUProxy.setForeground(0xFFFFFF)
 tty.clear()
-
-print(test)
-
