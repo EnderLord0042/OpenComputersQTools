@@ -84,9 +84,6 @@ local function menu(menuName,menuEntries,info)
     GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
     GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
     GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
-    GPUProxy.setBackground(colorSecondary)
-    GPUProxy.setForeground(colorPrimary)
-    GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
   end
   setupDisplay()
   local menuCount = 1
