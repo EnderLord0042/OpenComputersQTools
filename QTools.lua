@@ -22,12 +22,14 @@ local function menu(menuName,menuEntries)
   GPUProxy.fill(1,1,screenWidth,screenHeight," ")
   GPUProxy.set(4,2,menuName)
   GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
-  for i=2,table.maxn(menuEntries) do
-    GPUProxy.set(5,(5+i),menuEntries[i])
+  local iterator = 1
+  for _  in pairs(menuEntries) do
+    GPUProxy.set(6,(5+iterator),menuEntries[iterator])
+    iterator = iterator + 1
   end
   GPUProxy.setBackground(colorSecondary)
   GPUProxy.setForeground(colorPrimary)
-  GPUProxy.set(5,6,menuEntries[1])
+  GPUProxy.set(5,6,(menuEntries[1] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[1])))))
   GPUProxy.set(4,(screenHeight - 1),"Q")
   GPUProxy.set(16,(screenHeight - 1),"I")
   GPUProxy.set(34,(screenHeight - 1),"Enter")
