@@ -171,8 +171,9 @@ while not menu1result == "exit" do
     while not menu2result == "exit" do
       menu2result = menu("EEPROM Tools",{"Remove Beep"},{{"Remove Beep Info","Many different types of BIOS have a computer.beep() function call. This removes that."}})
       if menu2result == 1 then
-        if desc("Will Alter EEPROM","This will alter the EEPROM currently in your computer. Please enter the EEPROM to be altered or go back.",true)
+        if desc("Will Alter EEPROM","This will alter the EEPROM currently in your computer. Please enter the EEPROM to be altered or go back.",true) then
           desc("Not Implemented","This tool is not yet implemented in QTools. Please wait for another release",false)
+        end 
       end
     end
   elseif menu1result == 2 then
