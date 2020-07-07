@@ -15,37 +15,6 @@ end
 
 local screenWidth,screenHeight = GPUProxy.getResolution()
 
-local function menu(menuName,menuEntries)
-  local menuSelection = 1
-  GPUProxy.setBackground(colorPrimary)
-  GPUProxy.setForeground(colorSecondary)
-  GPUProxy.fill(1,1,screenWidth,screenHeight," ")
-  GPUProxy.set(4,2,menuName)
-  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
-  GPUProxy.setBackground(colorSecondary)
-  GPUProxy.setForeground(colorPrimary)
-  GPUProxy.set(4,(screenHeight - 1),"Q")
-  GPUProxy.set(16,(screenHeight - 1),"I")
-  GPUProxy.set(34,(screenHeight - 1),"Enter")
-  GPUProxy.fill(4,4,(screenWidth - 7),1," ")
-  GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
-  GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
-  GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
-  local function setSelection(sel)
-    GPUProxy.setBackground(colorPrimary)
-    GPUProxy.setForeground(colorSecondary)
-    local iterator = 1
-    for _  in pairs(menuEntries) do
-      GPUProxy.set(6,(5+iterator),(menuEntries[iterator] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[iterator])))))
-      iterator = iterator + 1
-    end
-    GPUProxy.setBackground(colorSecondary)
-    GPUProxy.setForeground(colorPrimary)
-    GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
-  end
-  setSelection(1)
-  os.sleep(500)
-end
 local function desc(descName,descInfo,continue)
   local menuSelection = 1
   GPUProxy.setBackground(colorPrimary)
@@ -98,7 +67,79 @@ local function desc(descName,descInfo,continue)
   return returnValue
 end
 
-local test = menu("Test",{"Option 1","Option 2","Option 3"})
+local function menu(menuName,menuEntries,info)
+  local menuSelection = 1
+  GPUProxy.setBackground(colorPrimary)
+  GPUProxy.setForeground(colorSecondary)
+  GPUProxy.fill(1,1,screenWidth,screenHeight," ")
+  GPUProxy.set(4,2,menuName)
+  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
+  GPUProxy.setBackground(colorSecondary)
+  GPUProxy.setForeground(colorPrimary)
+  GPUProxy.set(4,(screenHeight - 1),"Q")
+  GPUProxy.set(16,(screenHeight - 1),"I")
+  GPUProxy.set(34,(screenHeight - 1),"Enter")
+  GPUProxy.fill(4,4,(screenWidth - 7),1," ")
+  GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
+  GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
+  GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
+  local function setSelection(sel)
+    GPUProxy.setBackground(colorPrimary)
+    GPUProxy.setForeground(colorSecondary)
+    local menuCount = 1
+    for _  in pairs(menuEntries) do
+      GPUProxy.set(6,(5+menuCount),(menuEntries[menuCount] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[menuCount])))))
+      menuCount = menuCount + 1
+    end
+    GPUProxy.setBackground(colorSecondary)
+    GPUProxy.setForeground(colorPrimary)
+    GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
+  end
+  setSelection(1)
+  local returnValue = nil
+  local function handleKeyPress(event,keyboardAddress,char,code,playerName)
+    if code == 16 then
+      returnValue = "exit"
+    end
+    if code == 28 then
+      returnValue = menuEntries[menuSelection]
+    end
+    if code == 23 then
+      desc((info[menuSelection])[1],(info[menuSelection])[2],false)
+      setSelection(menuSelection)
+    end
+    if code == 208 then
+      if menuSelection == menuCount then
+        menuSelection = 0
+      else
+        menuSelection = menuSelection - 1
+      end
+      setSelection(menuSelection)
+    end
+    if code == 200 then
+      if menuSelection == 0 then
+        menuSelection = menuCount
+      else
+        menuSelection = menuSelection + 1
+      end
+      setSelection(menuSelection)
+    end
+  end
+  local function handleTouch(event,screenAddress,screenX,screenY,playerName)
+    
+  end
+  event.listen("key_down", handleKeyPress)
+  event.listen("touch",handleTouch)
+  while returnValue == nil do
+    os.sleep(0.05)
+  end
+  event.ignore("key_down", handleKeyPress)
+  event.ignore("touch",handleTouch)
+  return returnValue
+end
+
+
+local test = menu("Test",{"Option 1","Option 2","Option 3"},{{"Test","Test Info 1"},{"Test","Test Info 2"},{"Test","Test Info 3"}})
 
 GPUProxy.setBackground(0x000000)
 GPUProxy.setForeground(0xFFFFFF)
