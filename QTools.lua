@@ -150,6 +150,7 @@ local function menu(menuName,menuEntries,info)
         menuSelection = screenX - 5
         setSelection(menuSelection)
       end
+    end
   end
   event.listen("key_down", handleKeyPress)
   event.listen("touch",handleTouch)
