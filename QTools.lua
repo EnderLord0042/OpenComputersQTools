@@ -21,7 +21,7 @@ local function menu(menuName,menuEntries)
   GPUProxy.setForeground(colorSecondary)
   GPUProxy.fill(1,1,screenWidth,screenHeight," ")
   GPUProxy.set(4,2,menuName)
-  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select
+  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
   GPUProxy.setBackground(colorSecondary)
   GPUProxy.setForeground(colorPrimary)
   GPUProxy.set(4,(screenHeight - 1),"Q")
