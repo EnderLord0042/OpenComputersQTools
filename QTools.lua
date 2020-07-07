@@ -147,7 +147,7 @@ local function menu(menuName,menuEntries,info)
       if screenY == (menuSelection + 5) then
         returnValue = menuSelection
       else
-        menuSelection = screenX - 5
+        menuSelection = screenY - 5
         setSelection(menuSelection)
       end
     end
