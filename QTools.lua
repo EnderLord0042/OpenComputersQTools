@@ -96,39 +96,33 @@ local function menu(menuName,menuEntries,info)
     GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
   end
   setSelection(1)
-  os.sleep(5)
-  setSelection(2)
-  os.sleep(5)
-  setSelection(3)
-  os.sleep(5)
-  setSelection(1)
   local returnValue = nil
+  local canExit = true
   local function handleKeyPress(event,keyboardAddress,char,code,playerName)
-    if code == 16 then
+    if code == 16 anf canExit then
       returnValue = "exit"
     end
     if code == 28 then
-      returnValue = menuEntries[menuSelection]
+      returnValue = menuSelection
     end
     if code == 23 then
-      event.ignore("key_down", handleKeyPress)
+      canExit = false
       desc((info[menuSelection])[1],(info[menuSelection])[2],false)
       setSelection(menuSelection)
-      event.listen("key_down", handleKeyPress)
+      canExit = true
     end
-    if code == 208 then
-      if menuSelection != menuCount then
-        menuSelection = menuSelection - 1
-      else
+    if code == 200 then
+      menuSelection = menuSelection + 1
+      if menuSelection == menuCount then
         menuSelection = 1
       end
       setSelection(menuSelection)
     end
-    if code == 200 then
+    if code == 208 then
       if menuSelection != 1 then
-        menuSelection = menuSelection + 1
-      else
-        menuSelection = menuCount
+      menuSelection = menuSelection - 1
+      if menuSelection == 0 then
+        menuSelection = menuCount - 1
       end
       setSelection(menuSelection)
     end
