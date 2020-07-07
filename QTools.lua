@@ -163,11 +163,11 @@ local function menu(menuName,menuEntries,info)
 end
 
 
-local menu1result = nil
+local menu1result = "undetermined"
 while not menu1result == "exit" do
   menu1result = menu("QTools v1.0.0",{"EEPROM Tools","QNet","QDestop"},{{"EEPROM Tools Info","This is a collection of tools to allow you to easily make small changes to your EEPROM."},{"QNet Info","This is a collection of tools used in QNet, an internet system for OpenComputers based on the real Internet."},{"QDesktop Tools","This is a collection of tools for installing and modifying QDesktop, a desktop for OpenOS."}})
   if menu1result == 1 then
-    local menu2result = nil
+    local menu2result = "undetermined"
     while not menu2result == "exit" do
       menu2result = menu("EEPROM Tools",{"Remove Beep"},{{"Remove Beep Info","Many different types of BIOS have a computer.beep() function call. This removes that."}})
       if menu2result == 1 then
