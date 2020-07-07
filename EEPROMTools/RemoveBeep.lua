@@ -1,6 +1,7 @@
-local component = require("component")
+local requireTable{}
 
-local function unbeep()
+local function requireTable.unbeep()
+  local component = require("component")
   local EEPROM = component.eeprom.get()
   
   if not string.find(EEPROM,"computer.beep%(") then
@@ -16,4 +17,5 @@ local function unbeep()
   component.eeprom.set(EEPROM)
   return "Beeps successfully removed from current EEPROM."
 end
-print(unbeep())
+
+return requireTable
