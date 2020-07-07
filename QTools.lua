@@ -93,6 +93,9 @@ local function menu(menuName,menuEntries,info)
     menuCount = 1
     for _  in pairs(menuEntries) do
       GPUProxy.set(6,(5+menuCount),(menuEntries[menuCount] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[menuCount])))))
+      GPUProxy.setBackground(colorSecondary)
+      GPUProxy.setForeground(colorPrimary)
+      GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
       menuCount = menuCount + 1
     end
   end
