@@ -116,14 +116,14 @@ local function menu(menuName,menuEntries,info)
     end
     if code == 208 then
       if menuSelection == menuCount then
-        menuSelection = 0
+        menuSelection = 1
       else
         menuSelection = menuSelection - 1
       end
       setSelection(menuSelection)
     end
     if code == 200 then
-      if menuSelection == 0 then
+      if menuSelection == 1 then
         menuSelection = menuCount
       else
         menuSelection = menuSelection + 1
