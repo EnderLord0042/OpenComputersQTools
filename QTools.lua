@@ -21,15 +21,9 @@ local function menu(menuName,menuEntries)
   GPUProxy.setForeground(colorSecondary)
   GPUProxy.fill(1,1,screenWidth,screenHeight," ")
   GPUProxy.set(4,2,menuName)
-  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
-  local iterator = 1
-  for _  in pairs(menuEntries) do
-    GPUProxy.set(6,(5+iterator),menuEntries[iterator])
-    iterator = iterator + 1
-  end
+  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select
   GPUProxy.setBackground(colorSecondary)
   GPUProxy.setForeground(colorPrimary)
-  GPUProxy.set(6,6,(menuEntries[1] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[1])))))
   GPUProxy.set(4,(screenHeight - 1),"Q")
   GPUProxy.set(16,(screenHeight - 1),"I")
   GPUProxy.set(34,(screenHeight - 1),"Enter")
@@ -37,6 +31,19 @@ local function menu(menuName,menuEntries)
   GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
   GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
   GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
+  local function setSelection(sel)
+    GPUProxy.setBackground(colorPrimary)
+    GPUProxy.setForeground(colorSecondary)
+    local iterator = 1
+    for _  in pairs(menuEntries) do
+      GPUProxy.set(6,(5+iterator),(menuEntries[iterator] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[iterator])))))
+      iterator = iterator + 1
+    end
+    GPUProxy.setBackground(colorSecondary)
+    GPUProxy.setForeground(colorPrimary)
+    GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
+  end
+  setSelection(1)
   os.sleep(500)
 end
 local function desc(descName,descInfo,continue)
