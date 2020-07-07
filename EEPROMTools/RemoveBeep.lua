@@ -8,7 +8,7 @@ local function RemoveBeep()
   
   repeat
     local funcStart,_ = string.find(EEPROM,"computer.beep")
-    local funcEnd,_ = string.find(EEPROM,"%)",funcStart,string.len(EEPROM))
+    local funcEnd,_ = string.find(EEPROM,")",funcStart,string.len(EEPROM))
     EEPROM = string.sub(EEPROM, 1, (funcStart - 1)) .. string.sub(EEPROM, (funcEnd + 1), string.len(EEPROM))
   until(string.find(EEPROM,"computer.beep") == nil)
 
