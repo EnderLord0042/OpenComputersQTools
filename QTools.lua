@@ -22,8 +22,12 @@ local function menu(menuName,menuEntries)
   GPUProxy.fill(1,1,screenWidth,screenHeight," ")
   GPUProxy.set(4,2,menuName)
   GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
+  for i=2,table.maxn(menuEntries) do
+    GPUProxy.set(5,(5+i),menuEntries[i])
+  end
   GPUProxy.setBackground(colorSecondary)
   GPUProxy.setForeground(colorPrimary)
+  GPUProxy.set(5,6,menuEntries[1])
   GPUProxy.set(4,(screenHeight - 1),"Q")
   GPUProxy.set(16,(screenHeight - 1),"I")
   GPUProxy.set(34,(screenHeight - 1),"Enter")
@@ -85,7 +89,7 @@ local function desc(descName,descInfo,continue)
   return returnValue
 end
 
-local test = desc("Test","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.",true)
+local test = menu("Test",{"Option 1","Option 2","Option 3"})
 
 GPUProxy.setBackground(0x000000)
 GPUProxy.setForeground(0xFFFFFF)
