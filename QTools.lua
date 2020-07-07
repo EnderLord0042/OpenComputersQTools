@@ -1,9 +1,7 @@
 local component = require("component")
 local os = require("os")
-local keyboard = require("keyboard")
 local event = require("event")
 local tty = require("tty")
-local colors = require ("colors")
 local GPUProxy = component.getPrimary("gpu")
 
 local colorPrimary = 0x0000FF
@@ -101,29 +99,29 @@ local function menu(menuName,menuEntries,info)
   end
   setSelection(1)
   local returnValue = nil
-  local canExit = true
+  local canInteract = true
   local function handleKeyPress(event,keyboardAddress,char,code,playerName)
-    if code == 16 and canExit then
+    if code == 16 and canInteract then
       returnValue = "exit"
     end
-    if code == 28 then
+    if code == 28 and canInteract then
       returnValue = menuSelection
     end
-    if code == 23 then
-      canExit = false
+    if code == 23 and canInteract then
+      canInteract = false
       desc((info[menuSelection])[1],(info[menuSelection])[2],false)
       setupDisplay()
       setSelection(menuSelection)
-      canExit = true
+      canInteract = true
     end
-    if code == 208 then
+    if code == 208 and canInteract then
       menuSelection = menuSelection + 1
       if menuSelection == menuCount then
         menuSelection = 1
       end
       setSelection(menuSelection)
     end
-    if code == 200 then
+    if code == 200 and canInteract then
       menuSelection = menuSelection - 1
       if menuSelection == 0 then
         menuSelection = menuCount - 1
@@ -132,7 +130,26 @@ local function menu(menuName,menuEntries,info)
     end
   end
   local function handleTouch(event,screenAddress,screenX,screenY,playerName)
-    
+    if screenY == (screenHeight - 1) and screenX > 3 and screenX < 15 and canInteract then
+      returnValue = "exit"
+    end
+    if screenY == (screenHeight - 1) and screenX > 15 and screenX and canInteract < 33 then
+      canInteract = false
+      desc((info[menuSelection])[1],(info[menuSelection])[2],false)
+      setupDisplay()
+      setSelection(menuSelection)
+      canInteract = true
+    end
+    if screenY == (screenHeight - 1) and screenX > 33 and screenX and canInteract < 46 then
+      returnValue = menuSelection
+    end
+    if screenX > 5 and screenX < (screenWidth - 5) and screenY > 5 and screenY < (menuCount + 5) and canInteract then
+      if screenY == (menuSelection + 5) then
+        returnValue = menuSelection
+      else
+        menuSelection = screenX - 5
+        setSelection(menuSelection)
+      end
   end
   event.listen("key_down", handleKeyPress)
   event.listen("touch",handleTouch)
