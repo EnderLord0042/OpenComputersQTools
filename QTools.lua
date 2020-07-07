@@ -111,22 +111,24 @@ local function menu(menuName,menuEntries,info)
       returnValue = menuEntries[menuSelection]
     end
     if code == 23 then
+      event.ignore("key_down", handleKeyPress)
       desc((info[menuSelection])[1],(info[menuSelection])[2],false)
       setSelection(menuSelection)
+      event.listen("key_down", handleKeyPress)
     end
     if code == 208 then
-      if menuSelection == menuCount then
-        menuSelection = 1
-      else
+      if menuSelection != menuCount then
         menuSelection = menuSelection - 1
+      else
+        menuSelection = 1
       end
       setSelection(menuSelection)
     end
     if code == 200 then
-      if menuSelection == 1 then
-        menuSelection = menuCount
-      else
+      if menuSelection != 1 then
         menuSelection = menuSelection + 1
+      else
+        menuSelection = menuCount
       end
       setSelection(menuSelection)
     end
