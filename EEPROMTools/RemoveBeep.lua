@@ -6,11 +6,11 @@ local function RemoveBeep()
     return "No Beeps found in current EEPROM."
   end
   
-  while string.find(EEPROM,"computer.beep") do
+  repeat
     local funcStart,_ = string.find(EEPROM,"computer.beep")
     local funcEnd,_ = string.find(EEPROM,"%)",funcStart,string.len(EEPROM))
     EEPROM = string.sub(EEPROM, 1, (funcStart - 1)) .. string.sub(EEPROM, (funcEnd + 1), string.len(EEPROM))
-  end
+  until(string.find(EEPROM,"computer.beep") == nil)
 
   component.eeprom.set(EEPROM)
   return "Beeps successfully removed from current EEPROM."
