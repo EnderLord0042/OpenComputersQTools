@@ -96,6 +96,12 @@ local function menu(menuName,menuEntries,info)
     GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
   end
   setSelection(1)
+  os.sleep(5)
+  setSelection(2)
+  os.sleep(5)
+  setSelection(3)
+  os.sleep(5)
+  setSelection(1)
   local returnValue = nil
   local function handleKeyPress(event,keyboardAddress,char,code,playerName)
     if code == 16 then
