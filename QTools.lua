@@ -99,7 +99,7 @@ local function menu(menuName,menuEntries,info)
   local returnValue = nil
   local canExit = true
   local function handleKeyPress(event,keyboardAddress,char,code,playerName)
-    if code == 16 anf canExit then
+    if code == 16 and canExit then
       returnValue = "exit"
     end
     if code == 28 then
