@@ -1,6 +1,6 @@
 local RemoveBeep = {}
 
-local function requireTable.unbeep()
+local function RemoveBeep.unbeep()
   local component = require("component")
   local EEPROM = component.eeprom.get()
   
