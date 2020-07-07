@@ -133,14 +133,14 @@ local function menu(menuName,menuEntries,info)
     if screenY == (screenHeight - 1) and screenX > 3 and screenX < 15 and canInteract then
       returnValue = "exit"
     end
-    if screenY == (screenHeight - 1) and screenX > 15 and screenX and canInteract < 33 then
+    if screenY == (screenHeight - 1) and screenX > 15 and screenX < 33 and canInteract then
       canInteract = false
       desc((info[menuSelection])[1],(info[menuSelection])[2],false)
       setupDisplay()
       setSelection(menuSelection)
       canInteract = true
     end
-    if screenY == (screenHeight - 1) and screenX > 33 and screenX and canInteract < 46 then
+    if screenY == (screenHeight - 1) and screenX > 33 and screenX < 46 and canInteract then
       returnValue = menuSelection
     end
     if screenX > 5 and screenX < (screenWidth - 5) and screenY > 5 and screenY < (menuCount + 5) and canInteract then
