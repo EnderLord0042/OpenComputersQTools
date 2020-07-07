@@ -29,7 +29,7 @@ local function menu(menuName,menuEntries)
   end
   GPUProxy.setBackground(colorSecondary)
   GPUProxy.setForeground(colorPrimary)
-  GPUProxy.set(5,6,(menuEntries[1] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[1])))))
+  GPUProxy.set(6,6,(menuEntries[1] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[1])))))
   GPUProxy.set(4,(screenHeight - 1),"Q")
   GPUProxy.set(16,(screenHeight - 1),"I")
   GPUProxy.set(34,(screenHeight - 1),"Enter")
