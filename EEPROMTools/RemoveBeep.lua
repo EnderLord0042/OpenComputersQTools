@@ -1,6 +1,6 @@
 local component = require("component")
 
-local function = unbeep()
+local function unbeep()
   local EEPROM = component.eeprom.get()
   
   if not string.find(EEPROM,"computer.beep%(") then
