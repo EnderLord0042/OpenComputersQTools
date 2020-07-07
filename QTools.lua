@@ -69,31 +69,35 @@ end
 
 local function menu(menuName,menuEntries,info)
   local menuSelection = 1
-  GPUProxy.setBackground(colorPrimary)
-  GPUProxy.setForeground(colorSecondary)
-  GPUProxy.fill(1,1,screenWidth,screenHeight," ")
-  GPUProxy.set(4,2,menuName)
-  GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
-  GPUProxy.setBackground(colorSecondary)
-  GPUProxy.setForeground(colorPrimary)
-  GPUProxy.set(4,(screenHeight - 1),"Q")
-  GPUProxy.set(16,(screenHeight - 1),"I")
-  GPUProxy.set(34,(screenHeight - 1),"Enter")
-  GPUProxy.fill(4,4,(screenWidth - 7),1," ")
-  GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
-  GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
-  GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
+  local function setupDisplay()
+    GPUProxy.setBackground(colorPrimary)
+    GPUProxy.setForeground(colorSecondary)
+    GPUProxy.fill(1,1,screenWidth,screenHeight," ")
+    GPUProxy.set(4,2,menuName)
+    GPUProxy.set(4,(screenHeight - 1),"  Back/Quit   Additional Info       Select")
+    GPUProxy.setBackground(colorSecondary)
+    GPUProxy.setForeground(colorPrimary)
+    GPUProxy.set(4,(screenHeight - 1),"Q")
+    GPUProxy.set(16,(screenHeight - 1),"I")
+    GPUProxy.set(34,(screenHeight - 1),"Enter")
+    GPUProxy.fill(4,4,(screenWidth - 7),1," ")
+    GPUProxy.fill(4,5,1,(screenHeight - 8)," ")
+    GPUProxy.fill(4,(screenHeight - 3),(screenWidth - 8),1," ")
+    GPUProxy.fill((screenWidth - 4),5,1,(screenHeight - 7)," ")
+    GPUProxy.setBackground(colorSecondary)
+    GPUProxy.setForeground(colorPrimary)
+    GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
+  end
+  setupDisplay()
+  local menuCount = 1
   local function setSelection(sel)
     GPUProxy.setBackground(colorPrimary)
     GPUProxy.setForeground(colorSecondary)
-    local menuCount = 1
+    menuCount = 1
     for _  in pairs(menuEntries) do
       GPUProxy.set(6,(5+menuCount),(menuEntries[menuCount] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[menuCount])))))
       menuCount = menuCount + 1
     end
-    GPUProxy.setBackground(colorSecondary)
-    GPUProxy.setForeground(colorPrimary)
-    GPUProxy.set(6,(5+sel),(menuEntries[sel] .. string.rep(" ", (screenWidth - 11 - string.len(menuEntries[sel])))))
   end
   setSelection(1)
   local returnValue = nil
@@ -108,17 +112,18 @@ local function menu(menuName,menuEntries,info)
     if code == 23 then
       canExit = false
       desc((info[menuSelection])[1],(info[menuSelection])[2],false)
+      setupDisplay()
       setSelection(menuSelection)
       canExit = true
     end
-    if code == 200 then
+    if code == 208 then
       menuSelection = menuSelection + 1
       if menuSelection == menuCount then
         menuSelection = 1
       end
       setSelection(menuSelection)
     end
-    if code == 208 then
+    if code == 200 then
       menuSelection = menuSelection - 1
       if menuSelection == 0 then
         menuSelection = menuCount - 1
