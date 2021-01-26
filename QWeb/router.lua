@@ -1,6 +1,7 @@
 local component = require("component")
 local event = require("event")
 local fs = require("filesystem")
+local serialization = require("serialization")
 
 local hasInternet = component.isAvailable("internet")
 local hasTunnel = component.isAvailable("tunnel")
@@ -12,7 +13,10 @@ if hasTunnel then
 end
 
 local function handleModemMessage(receiverAddress, senderAddress, port, distance, header, data...)
-  
+  local packetInfo = serialization.unserialize(header)
+  local nonBreakingVersion = strsub(packetInfo["qwebVersion"], 0, string.find(packetInfo["qwebVersion"], ".", string.find(packetInfo["qwebVersion"],".")))
+  if nonBreakingVersion == "1.0" then
+    
   end
 end
 
