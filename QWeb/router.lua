@@ -1,27 +1,26 @@
 local component = require("component")
 local event = require("event")
-local event = require("filesystem")
-
-local ROUTER_QWEB_VERSION = "qweb1.0.0"
+local fs = require("filesystem")
 
 local hasInternet = component.isAvailable("internet")
 local hasTunnel = component.isAvailable("tunnel")
 
-component.modem.setWakeMessage(ROUTER_QWEB_VERSION, true)
+component.modem.setWakeMessage("qweb1.0.0/findRouter", true)
 
 if hasTunnel then
-  component.tunnel.setWakeMessage(ROUTER_QWEB_VERSION, true)
+  component.tunnel.setWakeMessage("qweb1.0.0/wake", true)
 end
 
-local function handleModemMessage(receiverAddress, senderAddress, port, distance, qwebVersion, packetType, fromIP, toIP, data, data2, data3, data4)
-  if qwebVersion == ROUTER_QWEB_VERSION then
-    if packetType == "findRouter" then
-      
-    else if packetType == "internetRequest" then
-      
-    else if packetType == "data" then
-      
+local function handleModemMessage(receiverAddress, senderAddress, port, distance, packetType, fromIP, toIP, virtualPort, data, data2, data3, data4)
+  if packetType == "qweb1.0.0/findRouter" then
+    
+  else if packetType == "qweb1.0.0/internetRequest" then
+    
+  else if packetType == "qweb1.0.0/data" then
+    if port != nil and hasTunnel then
+      component.tunnel.send(packetType, fromIP, toIP, virtualPort, data, data2, data3, data4)
     end
+    
   end
 end
 
