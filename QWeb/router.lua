@@ -14,7 +14,7 @@ end
 
 local function handleModemMessage(receiverAddress, senderAddress, port, distance, header, data...)
   local packetInfo = serialization.unserialize(header)
-  local nonBreakingVersion = strsub(packetInfo["qwebVersion"], 0, string.find(packetInfo["qwebVersion"], ".", string.find(packetInfo["qwebVersion"],".")))
+  local nonBreakingVersion = packetInfo["qwebVersion"]:match ".%d*.%d*"
   if nonBreakingVersion == "1.0" then
     
   end
