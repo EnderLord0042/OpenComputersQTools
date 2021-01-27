@@ -69,3 +69,7 @@ end
 
 event.listen("modem_message", handleModemMessage)
 print("event listener listening")
+
+while true do
+  
+end
