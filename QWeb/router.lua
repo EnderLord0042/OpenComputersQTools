@@ -63,6 +63,7 @@ end
 
 for i = 1,65535,1 do 
    component.modem.open(i)
+   io.write(tostring(i))
 end
 
 
