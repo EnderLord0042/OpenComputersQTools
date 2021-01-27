@@ -60,6 +60,11 @@ local function handleModemMessage(...)
   end
 end
 
+for i = 0,65535,1 do 
+   component.modem.open(i)
+end
+
+
 event.listen("modem_message", handleModemMessage)
 while true do
   
