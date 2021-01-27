@@ -12,7 +12,12 @@ if hasTunnel then
   component.tunnel.setWakeMessage("wake", true)
 end
 
-local function handleModemMessage(receiverAddress, senderAddress, port, distance, header, data...)
+local function handleModemMessage(...)
+  local receiverAddress = arg[1]
+  local senderAddress = arg[2]
+  local port = arg[3]
+  local distance = arg[4]
+  local header = arg [5]
   local packetInfo = serialization.unserialize(header)
   local nonBreakingVersion = packetInfo["qwebVersion"]:match "%d*.%d*"
   if nonBreakingVersion == "1.0" then
