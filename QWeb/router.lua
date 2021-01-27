@@ -15,11 +15,11 @@ end
 local function handleModemMessage(...)
   print("Function called")
   local arg = {...}
-  local receiverAddress = arg[1]
-  local senderAddress = arg[2]
-  local port = arg[3]
-  local distance = arg[4]
-  local header = arg [5]
+  local receiverAddress = arg[2]
+  local senderAddress = arg[3]
+  local port = arg[4]
+  local distance = arg[5]
+  local header = arg [6]
   local packetInfo = serialization.unserialize(header)
   local nonBreakingVersion = packetInfo["qwebVersion"]:match "%d*.%d*"
   if nonBreakingVersion == "1.0" then
@@ -61,15 +61,15 @@ local function handleModemMessage(...)
   end
 end
 
+print("Opening ports")
 for i = 1,1000,1 do --65535
    component.modem.open(i)
    print(tostring(i))
 end
+print("Ports Open")
 
-
-event.listen("modem_message", handleModemMessage)
 print("event listener listening")
 
 while true do
-  
+ handleModemMessage(event.pull("modem_message"))
 end
