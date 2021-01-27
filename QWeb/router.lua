@@ -51,9 +51,9 @@ local function handleModemMessage(...)
         io.close(ipListFile)
       end
       component.modem.send(senderAddress, port, serialization.serialize({qwebVersion="1.0.0",packetType="returnRouter",fromIP=identity,toIP=senderIP,packetPort=tostring(port)}), senderIP)
-    else if packetInfo["packetType"] == "internetRequest" then
+    elseif packetInfo["packetType"] == "internetRequest" then
       
-    else if packetInfo["packetType"] == "data" then
+    elseif packetInfo["packetType"] == "data" then
       
     end
   end
