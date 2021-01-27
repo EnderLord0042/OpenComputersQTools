@@ -71,5 +71,7 @@ print("Ports Open")
 print("event listener listening")
 
 while true do
- handleModemMessage(event.pull("modem_message"))
+ local test, receve, send, ppooort, distancce, heaader, datae = event.pull("modem_message")
+ print(test)
+ handleModemMessage(receve, send, ppooort, distancce, heaader, datae)
 end
