@@ -12,9 +12,8 @@ if hasTunnel then
   component.tunnel.setWakeMessage("wake", true)
 end
 
-local function handleModemMessage(...)
+local function handleModemMessage(arg)
   print("Function called")
-  local arg = {...}
   local receiverAddress = arg[2]
   local senderAddress = arg[3]
   local port = arg[4]
@@ -71,7 +70,7 @@ print("Ports Open")
 print("event listener listening")
 
 while true do
- local test, receve, send, ppooort, distancce, heaader, datae = event.pull("modem_message")
- print(test)
- handleModemMessage(receve, send, ppooort, distancce, heaader, datae)
+ local eventInfo = {event.pull("modem_message")}
+ print(eventInfo)
+ handleModemMessage(eventInfo)
 end
