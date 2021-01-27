@@ -13,7 +13,7 @@ if hasTunnel then
 end
 
 local function handleModemMessage(...)
-  term.write("Function called")
+  print("Function called")
   local arg = {...}
   local receiverAddress = arg[1]
   local senderAddress = arg[2]
@@ -63,9 +63,9 @@ end
 
 for i = 1,65535,1 do 
    component.modem.open(i)
-   term.write(tostring(i))
+   print(tostring(i))
 end
 
 
 event.listen("modem_message", handleModemMessage)
-term.write("event listener listening")
+print("event listener listening")
