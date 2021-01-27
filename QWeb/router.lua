@@ -61,3 +61,6 @@ local function handleModemMessage(...)
 end
 
 event.listen("modem_message", handleModemMessage)
+while true do
+  
+end
