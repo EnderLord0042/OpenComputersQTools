@@ -13,6 +13,7 @@ if hasTunnel then
 end
 
 local function handleModemMessage(...)
+  local arg = {...}
   local receiverAddress = arg[1]
   local senderAddress = arg[2]
   local port = arg[3]
