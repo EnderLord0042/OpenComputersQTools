@@ -61,7 +61,7 @@ local function handleModemMessage(...)
   end
 end
 
-for i = 1,65535,1 do 
+for i = 1,1000,1 do --65535
    component.modem.open(i)
    print(tostring(i))
 end
