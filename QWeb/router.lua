@@ -60,12 +60,9 @@ local function handleModemMessage(arg)
   end
 end
 
-print("Opening ports")
-for i = 1,1000,1 do --65535
-   component.modem.open(i)
-   print(tostring(i))
-end
-print("Ports Open")
+
+component.modem.open(42)
+
 
 print("event listener listening")
 
