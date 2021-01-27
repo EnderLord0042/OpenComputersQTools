@@ -13,6 +13,7 @@ if hasTunnel then
 end
 
 local function handleModemMessage(...)
+  io.write("Function called")
   local arg = {...}
   local receiverAddress = arg[1]
   local senderAddress = arg[2]
@@ -66,6 +67,4 @@ end
 
 
 event.listen("modem_message", handleModemMessage)
-while true do
-  
-end
+io.write("event listener listening")
