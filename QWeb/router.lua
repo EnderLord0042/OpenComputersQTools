@@ -37,9 +37,9 @@ local function handleModemMessage(arg)
       print(identity)
       io.close(identityFile)
       local senderIP = ""
-      for ip, address in pairs(iplist) do
-        if senderAddress == address then
-          senderIP = ip
+      for i, v in pairs(iplist) do
+        if senderAddress == v then
+          senderIP = i
         end
       end
       if senderIP == "" then
