@@ -25,14 +25,15 @@ local function handleModemMessage(arg)
     if packetInfo["packetType"] == "findRouter" then
       local ipListFile = io.open("iplist.txt","r")
       io.input(ipListFile)
-      local ipList = serialization.unserialize(io.read("*l"))
-      print(io.read("*l"))
+      local ipList = serialization.unserialize(io.read())
+      print(io.read())
       print("pog")
       print(ipList)
       io.close(ipListFile)
       local identityFile = io.open("identity.txt","r")
       io.input(identityFile)
-      local identity = io.read("*l")
+      local identity = io.read()
+      print(identity)
       io.close(identityFile)
       local senderIP = ""
       for ip, address in pairs(iplist) do
