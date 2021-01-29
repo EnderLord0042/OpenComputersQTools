@@ -2,6 +2,7 @@ local component = require("component")
 local event = require("event")
 local fs = require("filesystem")
 local serialization = require("serialization")
+local keyboard = require("keyboard")
 
 local hasInternet = component.isAvailable("internet")
 local hasTunnel = component.isAvailable("tunnel")
@@ -60,7 +61,16 @@ local function handleModemMessage(arg)
       end
       component.modem.send(senderAddress, port, serialization.serialize({qwebVersion="1.0.0",packetType="returnRouter",fromIP=identity,toIP=senderIP,packetPort=tostring(port)}), senderIP)
     elseif packetInfo["packetType"] == "internetRequest" then
-      
+      local identityFile = io.open("identity.txt","r")
+      io.input(identityFile)
+      local identity = io.read()
+      print(identity)
+      io.close(identityFile)
+      if hasInternet then
+        
+      else
+        
+      end
     elseif packetInfo["packetType"] == "data" then
       
     end
@@ -73,7 +83,7 @@ component.modem.open(42)
 
 print("event listener listening")
 
-while true do
+while not (keyboard.isControlDown() and keyboard.isKeyDown("c")) do
  local eventInfo = {event.pull("modem_message")}
  print(eventInfo)
  handleModemMessage(eventInfo)
